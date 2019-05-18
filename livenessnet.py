@@ -10,7 +10,6 @@ from keras.layers.core import Dense
 from keras import backend as K
 from keras.utils import plot_model
 
-
 class LivenessNet:
 	@staticmethod
 	def build(width, height, depth, classes):
@@ -27,7 +26,8 @@ class LivenessNet:
 			chanDim = 1
 
 		# first CONV => RELU => CONV => RELU => POOL layer set
-		model.add(Conv2D(16, (3, 3), padding="same", input_shape=inputShape))
+		model.add(Conv2D(16, (3, 3), padding="same",
+			input_shape=inputShape))
 		model.add(Activation("relu"))
 		model.add(BatchNormalization(axis=chanDim))
 		model.add(Conv2D(16, (3, 3), padding="same"))
@@ -57,6 +57,58 @@ class LivenessNet:
 		model.add(Dense(classes))
 		model.add(Activation("softmax"))
 
+		# saving model structure as png
+		plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+
 		# return the constructed network architecture
-		plot_model(model, to_file='cnn1_plot.png', show_shapes=True, show_layer_names=True)
+		return model
+
+class LivenessNetCNN:
+	@staticmethod
+	def build(width, height, depth, classes):
+		# initialize the model along with the input shape to be
+		# "channels last" and the channels dimension itself
+		model = Sequential()
+		inputShape = (height, width, depth)
+		chanDim = -1
+
+		# if we are using "channels first", update the input shape
+		# and channels dimension
+		if K.image_data_format() == "channels_first":
+			inputShape = (depth, height, width)
+			chanDim = 1
+
+		# first CONV => RELU => CONV => RELU => POOL layer set
+		model.add(Conv2D(16, (3, 3), padding="same",
+			input_shape=inputShape))
+		model.add(Activation("relu"))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Conv2D(16, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
+
+		# second CONV => RELU => CONV => RELU => POOL layer set
+		model.add(Conv2D(32, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Conv2D(32, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
+
+		# first (and only) set of FC => RELU layers
+		model.add(Flatten())
+		model.add(Dense(64))
+		model.add(Activation("relu"))
+		model.add(Dropout(0.5))
+
+		# softmax classifier
+		model.add(Dense(classes))
+		model.add(Activation("softmax"))
+
+		# saving model structure as png
+		plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+
+		# return the constructed network architecture
 		return model
