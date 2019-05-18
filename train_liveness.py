@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("Agg")
 
 # import the necessary packages
-from livenessnet import LivenessNet
+from livenessnet import LivenessNet, LivenessNetCNN1, LivenessNetCNN2
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -52,6 +52,7 @@ for imagePath in imagePaths:
 	label = imagePath.split(os.path.sep)[-2]
 	image = cv2.imread(imagePath)
 	image = cv2.resize(image, (32, 32))
+	#image = cv2.resize(image, (50, 50))
 
 	# update the data and labels lists, respectively
 	data.append(image)
@@ -80,7 +81,7 @@ aug = ImageDataGenerator(rotation_range=20, zoom_range=0.15,
 # initialize the optimizer and model
 print("[INFO] compiling model...")
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
-model = LivenessNet.build(width=32, height=32, depth=3,
+model = LivenessNet.build(width=image.shape[0], height=image.shape[1], depth=3,
 	classes=len(le.classes_))
 model.compile(loss="binary_crossentropy", optimizer=opt,
 	metrics=["accuracy"])
