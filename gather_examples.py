@@ -31,11 +31,10 @@ net = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 
 # open a pointer to the video file stream and initialize the total
 # number of frames read and saved thus far
-read = 0
 saved = 0
-for each in os.listdir(args["input"]):
-	vs = cv2.VideoCapture(args["input"] + "/" +each)
-	
+for video in os.listdir(args["input"]):
+	vs = cv2.VideoCapture(os.path.sep.join([args["input"], video]))
+	read = 0
 
 	# loop over frames from the video file stream
 	while True:
