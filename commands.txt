@@ -1,0 +1,8 @@
+## Extract Faces
+python gather_examples.py --input videos/fake.mp4 --output dataset/fake --detector face_detector --skip 1
+
+## Training the Network
+python train.py --dataset dataset --model liveness.model --le le.pickle
+
+## Live Demo  
+python liveness_demo.py --model liveness.model --le le.pickle --detector face_detector
