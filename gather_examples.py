@@ -11,7 +11,7 @@ import os
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--input", type=str, required=True,
-	help="path to input video directory")
+	help="path to input video ")
 ap.add_argument("-o", "--output", type=str, required=True,
 	help="path to output directory of cropped faces")
 ap.add_argument("-d", "--detector", type=str, required=True,
@@ -28,8 +28,6 @@ protoPath = os.path.sep.join([args["detector"], "deploy.prototxt"])
 modelPath = os.path.sep.join([args["detector"],
 	"res10_300x300_ssd_iter_140000.caffemodel"])
 net = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
-
-# Extracting Faces from all videos in input directory
 
 # open a pointer to the video file stream and initialize the total
 # number of frames read and saved thus far
