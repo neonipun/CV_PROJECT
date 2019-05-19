@@ -1,6 +1,5 @@
-# USAGE
-# python gather_examples.py --input videos/real.mov --output dataset/real --detector face_detector --skip 1
-# python gather_examples.py --input videos/fake.mp4 --output dataset/fake --detector face_detector --skip 4
+# CMSC 691 - Computer Vision, Spring 2019 - PROJECT
+# Project Collaborators: Nipun Ramagiri, Ashish Kumar
 
 # import the necessary packages
 import numpy as np

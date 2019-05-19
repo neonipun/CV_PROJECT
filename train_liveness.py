@@ -1,5 +1,5 @@
-# USAGE
-# python train_liveness.py --dataset dataset --model liveness.model --le le.pickle
+# CMSC 691 - Computer Vision, Spring 2019 - PROJECT
+# Project Collaborators: Nipun Ramagiri, Ashish Kumar
 
 # set the matplotlib backend so figures can be saved in the background
 import matplotlib

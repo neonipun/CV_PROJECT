@@ -1,6 +1,5 @@
-# USAGE
-# python liveness_demo.py --model liveness.model --le le.pickle --detector face_detector
-
+# CMSC 691 - Computer Vision, Spring 2019 - PROJECT
+# Project Collaborators: Nipun Ramagiri, Ashish Kumar
 # import the necessary packages
 from imutils.video import VideoStream
 from keras.preprocessing.image import img_to_array

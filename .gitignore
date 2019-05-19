@@ -2,3 +2,5 @@
 *.mov
 *.MOV
 *.MP4
+.vscode
+./__pycache__

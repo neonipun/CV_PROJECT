@@ -1,3 +1,6 @@
+# CMSC 691 - Computer Vision, Spring 2019 - PROJECT
+# Project Collaborators: Nipun Ramagiri, Ashish Kumar
+
 # import the necessary packages
 from keras.models import Sequential
 from keras.layers.normalization import BatchNormalization
